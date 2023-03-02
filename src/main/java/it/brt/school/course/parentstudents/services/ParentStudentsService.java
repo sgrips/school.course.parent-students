@@ -1,9 +1,8 @@
 package it.brt.school.course.parentstudents.services;
 
-import it.brt.school.course.parentstudents.models.StudentJustification;
+import it.brt.school.course.parentstudents.models.StudentJustificationMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +13,7 @@ public class ParentStudentsService {
 
 
     @Autowired
-    private KafkaTemplate<String, StudentJustification> studentJustificationKafkaTemplate;
-
-
+    private KafkaTemplate<String, StudentJustificationMessage> studentJustificationKafkaTemplate;
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
@@ -26,7 +23,7 @@ public class ParentStudentsService {
     }
 
 
-    public void sendMessage(StudentJustification msg) {
+    public void sendMessage(StudentJustificationMessage msg) {
         studentJustificationKafkaTemplate.send(topicName, msg);
     }
 

@@ -1,13 +1,12 @@
 package it.brt.school.course.parentstudents.web;
 
 
-import it.brt.school.course.parentstudents.models.StudentJustification;
+import it.brt.school.course.parentstudents.models.StudentJustificationMessage;
 import it.brt.school.course.parentstudents.services.ParentStudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.function.EntityResponse;
 
 import java.util.Date;
 import java.util.Optional;
@@ -26,22 +25,15 @@ public class ApiController {
     }
 
     @PostMapping(value = "/justification/signature")
-    public ResponseEntity<String> signatureJustification(@RequestParam(name = "name") String name, @RequestParam(name = "studentname") String studentName) {
+    public ResponseEntity<String> signatureJustification(@RequestBody(required = true) StudentJustificationMessage studentJustification) {
         //simple message
-        parentStudentServices.sendMessage(String.format("giustificazione %1s, genitore %2s", name, studentName));
+//        parentStudentServices.sendMessage(String.format("giustificazione %1s, genitore %2s", name, studentName));
+
         //custom message
-        parentStudentServices.sendMessage(new StudentJustification() {{
-            setStudentName(studentName);
-            setParentSignature(name);
-            setCreateTime(new Date());
-        }});
+        parentStudentServices.sendMessage(studentJustification);
 
 
-        return new ResponseEntity<>("giustificianzione inviata, grazie di aver usato il servizio smart justification", HttpStatus.OK);
+        return new ResponseEntity<>("giustificianzione inviata, grazie di aver usato il servizio smart Sgrips-Justification", HttpStatus.OK);
     }
 
-    @GetMapping(value = "/justification")
-    public ResponseEntity<String> listJustifications() {
-        return new ResponseEntity<>("not implemented", HttpStatus.OK);
-    }
 }

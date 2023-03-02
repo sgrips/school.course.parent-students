@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
 
-public class StudentJustification
+public class StudentJustificationMessage
 {
     @Getter
     @Setter
@@ -16,9 +16,6 @@ public class StudentJustification
     @Getter
     @Setter
     private String parentSignature;
-    @Getter
-    @Setter
-    private Date createTime;
     @Getter
     @Setter
     private Date absentFrom;

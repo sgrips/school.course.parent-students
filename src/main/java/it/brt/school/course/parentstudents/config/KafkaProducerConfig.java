@@ -1,7 +1,7 @@
 package it.brt.school.course.parentstudents.config;
 
 
-import it.brt.school.course.parentstudents.models.StudentJustification;
+import it.brt.school.course.parentstudents.models.StudentJustificationMessage;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,7 +43,7 @@ public class KafkaProducerConfig {
 
 
     @Bean
-    public ProducerFactory<String, StudentJustification> studentJustificationProducerFactory() {
+    public ProducerFactory<String, StudentJustificationMessage> studentJustificationProducerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
@@ -58,7 +58,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, StudentJustification> studentJustificationKafkaTemplate() {
+    public KafkaTemplate<String, StudentJustificationMessage> studentJustificationKafkaTemplate() {
         return new KafkaTemplate<>(studentJustificationProducerFactory());
     }
 
